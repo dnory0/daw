@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> inscription finale </title>
+  <style>
+    @font-face {
+      font-family: 'cairo';
+      src: url('Cairo-SemiBold.ttf')
+    }
+
+    * {
+      font-family: cairo;
+    }
+
+    section {
+      float: left;
+      min-width: 380px;
+      padding: 0 calc(40vw - 180px);
+    }
+
+    form {
+      display: block;
+      padding: 20px;
+      float: left;
+    }
+
+    article {
+      padding: 20px 0;
+    }
+
+    input {
+      height: 30px;
+      width: 380px;
+      padding: 2px;
+      margin: 10px 0;
+      border: 1px solid;
+    }
+
+    select {
+      height: 36px;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+
+    <h3>
+      Les informations de l'inscription:
+    </h3>
+    <form class="form1" action="inscription.php" method="post">
+      <article>
+        <label for="nom">Nom : </label><br>
+        <input type="text" name="nom" id="nom" required maxlength="50" placeholder="Exemple: bororo"><br>
+
+        <label for="prenom">Prenom : </label><br>
+        <input type="text" name="prenom" id="prenom" required maxlength="50" placeholder="Exemple: bororo"><br>
+
+        <label for="daten">Date de Naissance : </label><br>
+        <input type="date" name="daten" id="daten" required placeholder="Exemple: 15/10/2015"><br>
+
+        <label for="lieun">Lieu de Naissance : </label><br>
+        <input type="lieun" name="lieun" id="lieun" required placeholder="Exemple: thenia boumerdes "><br>
+
+        <label for="email">E-mail : </label><br>
+        <input type="email" name="email" id="email" required placeholder="Exemple: admin@gmail.com" maxlength="150"><br>
+
+        <label for="pass">Mot de Passe : </label><br>
+        <input type="password" name="pass" id="pass" required maxlength="50" minlength="8"><br>
+      </article>
+      <article>
+        <label for="tel">Télephone : </label><br>
+        <input type="tel" name="tel" id="tel" required maxlength="10" placeholder="Exemple: 0558985005"><br>
+
+        <label for="nationalite">Nationalite : </label><br>
+        <input type="text" name="nationalite" id="nationalite" required maxlength="50"
+          placeholder="Exemple: Algerien"><br>
+
+        <label for="pays">Pays : </label><br>
+        <input type="text" name="pays" id="pays" required maxlength="50" placeholder="Exemple: Algerie"><br>
+
+        <label for="adresse">Adresse : </label><br>
+        <input type="text" name="adresse" id="adresse" required maxlength="150"
+          placeholder="Exemple: rue bouakel rabah thenia boumerdes"><br>
+      </article>
+
+      <article>
+        <label>Langue:</label>
+        <select id="combobox" style="width: 146px;">
+          <option value="0" selected disabled>-</option>
+          <option value="Afrikanns">Afrikanns</option>
+          <!-- temp.html -->
+        </select>
+        <label for="niveau">Niveau:</label>
+        <select class="" name="niveau" style="width: 122px">
+          <option value="0">-</option>
+          <option value="Bilingue">Bilingue</option>
+          <option value="Lu, écrit, parlé">Lu, écrit, parlé</option>
+          <option value="Courant">Courant</option>
+        </select><br>
+      </article>
+      <article>
+        <label for="diplome">Deplome et formations:</label><br>
+        <input type="text" name="diplome" id="diplome" placeholder="exemple : stage" style="width: 210px">
+        <input type="date" name="dated" style="width: 160px"><br>
+      </article>
+      <article>
+        <label for="exeperionce">Exeperionce</label><br>
+        <input type="text" name="exeperionce" id="exeperionce" placeholder="exemple : plombie" style="width: 320px">
+
+        <select class="" name="anneexeperionce" style="width: 56px;">
+          <option selected disabled>-</option>
+          <option value="0">&lt;1</1>
+          </option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">&gt;3</option>
+        </select>
+      </article>
+
+      <input type="submit" value="S'inscrire">
+    </form>
+  </section>
+</body>
+
+</html>
