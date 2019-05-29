@@ -1,0 +1,43 @@
+<?php
+  require_once '../functions.php';
+  session_start();
+  $lang = lang('en');
+  $page = '';
+  require_once '../top.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome Page</title>
+  <?php
+    require_once '../imports.php';
+  ?>
+  <style>
+  </style>
+</head>
+
+<body>
+  <?php
+    if (!$loggedin) {
+      require_once '../login-signup.php';
+    }
+    require_once '../header.php';
+  ?>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <h3>Hi there are you ok?</h3>
+  <?php
+    require_once '../footer.php';
+  ?>
+</body>
+
+</html>

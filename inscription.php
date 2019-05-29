@@ -4,7 +4,7 @@ $dbuser = "hocine";
 $dbpass = "hocine";
 $dbname = "daw";
 
-$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname, );
 if ($connection->connect_error) die("Could not connect to the database.");
 
 unset($dbhost);

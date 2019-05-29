@@ -1,0 +1,17 @@
+<form onsubmit="return test()">
+  First: Enter in the input field <input type="text" value="text"><br>
+  Second: Click "submit": <input type="submit" value="Submit">
+</form>
+<label><input type="radio" id="radio" onclick="selectornot(this);">Red</label>
+
+<script>
+  function selectornot(element) {
+    if (element.checked) console.log('checked');
+    else console.log('unchecked');
+  }
+  function test() {
+    alert('submit!');
+    return false;
+  }
+  
+</script>

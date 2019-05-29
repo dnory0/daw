@@ -1,0 +1,137 @@
+#login-signup-bg {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  background: rgba(70, 70, 70, 0.6);
+  position: fixed;
+}
+
+#login-signup-pane {
+  display: none;
+  background-color: white;
+  position: absolute;
+  width: 426px;
+  left: calc(50% - 213px);
+  top: calc(50% - 220px);
+}
+
+#login-signup-pane #login-signup-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+#login-signup-pane #login-signup-tabs .login-signup-tab {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  padding: 12px;
+  font-size: 18px;
+  background-color: #f0f0f0;
+}
+
+#login-signup-pane #login-signup-tabs .login-signup-tab input {
+  display: none;
+}
+
+#login-signup-pane #login-signup-tabs .chosen-tab {
+  border-top: 5px goldenrod solid;
+  background-color: white;
+}
+
+#login-signup-pane #errormsg-field {
+  padding: 10px;
+}
+
+#login-signup-pane #errormsg-field.ar {
+  float: right;
+  direction: rtl;
+}
+
+#login-signup-pane #errormsg-field > div {
+  background-color: #ff2600;
+  -webkit-transition: background-color 1s ease-out 0.2s;
+  transition: background-color 1s ease-out 0.2s;
+  padding: 5px;
+}
+
+#login-signup-pane #errormsg-field > div.error-triggerd {
+  -webkit-transition: background-color 1s ease-out 0.2s;
+  transition: background-color 1s ease-out 0.2s;
+  background-color: white;
+}
+
+#login-signup-pane .content {
+  display: none;
+  padding: 20px;
+  float: left;
+}
+
+#login-signup-pane .content label {
+  float: left;
+}
+
+#login-signup-pane .content label input {
+  height: 30px;
+  width: 380px;
+  padding: 2px;
+  margin: 10px 0;
+  border: 1px solid;
+}
+
+#login-signup-pane .content label.ar {
+  direction: rtl;
+}
+
+#login-signup-pane .content label.ar input.ar {
+  direction: ltr;
+}
+
+#login-signup-pane .chosen-content {
+  display: block;
+}
+
+#login-signup-pane #login-signup-footer {
+  float: right;
+  padding: 10px;
+}
+
+#login-signup-pane #login-signup-footer > div {
+  padding: 10px;
+  float: left;
+}
+
+#login-signup-pane #login-signup-footer button, #login-signup-pane #login-signup-footer input {
+  float: right;
+  background-color: #6301be;
+  font-size: 16px;
+  padding: 2px 12px;
+  border: none;
+  float: left;
+  color: white;
+}
+
+#login-signup-pane #login-signup-footer button:hover, #login-signup-pane #login-signup-footer input:hover {
+  background-color: #a053e7;
+}
+
+#login-signup-pane #login-signup-footer button:active, #login-signup-pane #login-signup-footer input:active {
+  color: orangered;
+}
+
+#login-signup-pane #login-signup-footer.ar {
+  float: left;
+}
+
+#login-signup-pane #login-signup-footer.ar > div {
+  float: right;
+}
+
+@media only screen and (max-height: 460px) {
+  #login-signup-pane {
+    top: 10px;
+  }
+}
+/*# sourceMappingURL=login-signup.css.map */

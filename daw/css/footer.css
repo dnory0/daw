@@ -1,0 +1,93 @@
+footer {
+  float: left;
+  background-color: #272727;
+  color: white;
+  padding: 10px 30px;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+footer * {
+  margin: 0;
+}
+
+footer #footer-left {
+  float: left;
+  padding: 0 20px;
+  width: calc(100% - 480px);
+  min-width: 320px;
+}
+
+footer #footer-left #copyright-symbol {
+  float: left;
+}
+
+footer #footer-left #copyright-text {
+  padding: 7px 20px 8px;
+}
+
+footer #footer-left #aboutus h4 {
+  padding: 5px 20px;
+}
+
+footer #footer-left #aboutus div {
+  text-align: justify;
+}
+
+footer #footer-right {
+  float: right;
+  width: 386px;
+}
+
+footer #footer-right #thanks {
+  color: #ff4848;
+}
+
+footer #footer-right label, footer #footer-right form {
+  float: left;
+}
+
+footer #footer-right #email {
+  height: 30px;
+  width: 380px;
+  padding: 2px;
+  margin: 10px 0;
+  border: 1px solid;
+}
+
+footer #footer-right #feedback-textarea {
+  margin: 10px 0;
+  resize: none;
+  width: 380px;
+  overflow: auto;
+}
+
+footer #footer-right #feedback-btn {
+  float: right;
+  background-color: white;
+  font-size: 16px;
+  padding: 0 20px;
+  border: none;
+}
+
+footer #footer-right #feedback-btn:hover {
+  background-color: #a053e7;
+}
+
+footer #footer-right #feedback-btn:active {
+  color: white;
+}
+
+footer #footer-right.ar #email {
+  direction: ltr;
+}
+
+footer #footer-right.ar #feedback-btn {
+  float: left;
+}
+
+.ar {
+  direction: rtl;
+}
+/*# sourceMappingURL=footer.css.map */
