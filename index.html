@@ -20,7 +20,7 @@
       background-size: cover;
       background-attachment: fixed;
     }
-    nav {
+    /* nav {
       height: 33px;
       background-color: #4ea036;
       padding: 5px 10px;
@@ -32,16 +32,22 @@
       border: 1px solid black;
       height: 30px;
       padding: 0 20px;
+    } */
+    body>div:first-child {
+      float: left;
+      width: 100%;
+      background-color: #e2d8d8;
+      height: 400px;
+    }
+    body>div:first-child>div:first-child {
+      float: right;
     }
   </style>
 </head>
 <body>
-  
-  <nav>
-    <a href="./"><img src="img/icons8-home-26.png" alt="home"></a>
-    <!-- <a href="inscription.html">S'inscrire comme un administrateur</a>
-    <a href=""></a> -->
-  </nav>
-  
+  <div>
+    <div><img src="/img/main-page-facer.png"></div>
+    <div style="padding: 50px 20px; font-size: 26px; float: left;">Bienvenue Sur Le Siteweb d'Enregistrement des Concours de Doctorat.</div>
+  </div>
 </body>
 </html>
