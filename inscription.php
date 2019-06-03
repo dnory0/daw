@@ -20,7 +20,7 @@
       margin: 0;
     }
 
-    body>div:first-child {
+    body>div#main {
       text-align: center;
       height: 100vh;
       padding: 50px;
@@ -58,22 +58,9 @@
 </head>
 
 <body>
-  <?php
-$dbhost = "localhost";
-$dbuser = "hocine";
-$dbpass = "hocine";
-$dbname = "daw";
-// connecting to databases
-$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname, );
-if ($connection->connect_error) die("Could not connect to the database.");
-
-unset($dbhost);
-unset($dbuser);
-unset($dbpass);
-unset($dbname);
-
+<?php
+require_once 'root.php';
 $success = false;
-
 
 if (isset($_POST['nom']) && isset($_POST['prenom']) &&
     isset($_POST['daten']) && isset($_POST['lieun']) &&
@@ -85,8 +72,18 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) &&
   ) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
+    $daten = $_POST['daten'];
+    $lieun = $_POST['lieun'];
     $email = $_POST['email'];
+    $pass = $_POST['pass'];
     $tel = $_POST['tel'];
+    $nationalite = $_POST['nationalite'];
+    $pays = $_POST['pays'];
+    $adresse = $_POST['adresse'];
+    $lang = $_POST['lang'];
+    $niveau = $_POST['niveau'];
+    $diplome = $_POST['diplome'];
+    $dated = $_POST['dated'];
     // les champs de experience et anneexperience ne sont pas obliguatoires.
     if (isset($_POST['experience']) && isset($_POST['anneexperience'])) {
       // on utilisée plus tard.
@@ -94,10 +91,13 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) &&
       $anneexperience = $_POST['anneexperience'];
     }
     // check email and phone number if already exist in our database: stop registration, else continue.
-    $result = $connection->query("SELECT * FROM etudiants WHERE etd_email='$email' OR etd_tel='$tel'");
+    $result = $connection->query("SELECT mat FROM etudiant WHERE email='$email' OR tel='$tel'");
     if (!$result->num_rows) {
       // insert new user.
-      $result = $connection->query("INSERT INTO etudiants VALUES(NULL, '$nom', '$prenom', '$email', '$tel')");
+      $result = $connection->query("INSERT INTO etudiant VALUES(
+        NULL, '$nom', '$prenom', '$daten', '$lieun', '$email', '$pass', '$tel', '$nationalite',
+        '$pays', '$adresse', '$lang', '$niveau', 'att', 1
+      )");
       if ($result) {
         // inserting new user successfully.
         $success = true;
@@ -120,20 +120,20 @@ _FAIL_MSG;
       // email/tel already exists on the database.
       $success = false;
       $failmsg = <<< _FAIL_MSG
-        <div>Désolé, ce e-mail ou/et téléphone a déjà utilisé.</div>
+        <div>Désolé, cet e-mail ou/et téléphone a déjà utilisé.</div>
 _FAIL_MSG;
     }
   } else {
     // didn't enter all required informations.
     $success = false;
     $failmsg = <<< _FAIL_MSG
-      <div>Désolé, vous devez remplir tous les informations nécessaire pour une inscription .</div>
+      <div>Désolé, vous devez remplir tous les informations nécessaire pour l'inscription .</div>
 _FAIL_MSG;
   }
 
 if ($success) {
   echo <<< _BEGIN
-    <div style="background-color: #deffe0;">
+    <div id="main" style="background-color: #deffe0;">
       <div><img src="img/success.png" alt="Success" style="width: 180px;"></div>
 _BEGIN;
   echo $successmsg;
@@ -143,7 +143,7 @@ _BEGIN;
 _END;
 } else {
   echo <<< _BEGIN
-    <div style="background-color: #fff5f1;">
+    <div id="main" style="background-color: #fff5f1;">
       <div><img src="img/fail.png" alt="Failed" style="width: 180px;"></div>
 _BEGIN;
   echo $failmsg;
