@@ -1,0 +1,142 @@
+<html>
+
+<head>
+  <title>Connectez-vous</title>
+  <link rel="stylesheet" type="text/css" href="style2.css">
+</head>
+<style>
+  body {
+    margin: 0;
+    background: url('img/bg.svg');
+    background-size: cover;  
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-attachment: fixed;
+  }
+
+  input[type=text] {
+    padding: 7px;
+    border: none;
+    font-size: 16px;
+    font-family: sans-serif;
+  }
+
+  .box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: #828282;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+
+  }
+
+  #type {
+    width: 340px;
+    height: 60px;;
+  }
+
+  .div-lbl-type {
+    margin-top: 20px;
+    width: 170px;
+    float: left;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .box h2 {
+    color: #fff;
+    margin: 22px 0 30px;
+    padding: 0;
+    text-align: center;
+
+  }
+
+  .box .inputBox {
+    position: relative;
+  }
+
+  .box .inputBox input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 3px solid #3aff00c7;
+    outline: none;
+    background: transparent;
+
+
+  }
+
+  .box .inputBox label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: 1.4s;
+
+  }
+
+
+  .box .inputBox input:focus ~ label,
+  .box .inputBox input:valid ~ label {
+    top: -18px;
+    left: 0;
+    color: #03a9f4;
+    font-size: 12px;
+  }
+
+  .box input[type="submit"] {
+    background: transparent;
+    outline: none;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 142px;
+    margin-top: 15px;
+    border-radius: 6px;
+    border: 1px solid #0006;
+    background-color: #3aff00c7;
+    margin-left: 200px;
+  }
+</style>
+
+<body>
+
+  <!-- <div class="box"> -->
+    <!-- <input type="radio" name="" id=""> -->
+    
+    <form method="POST" action="login.php" class="box">
+      <h2>Login</h2>
+      <div style="padding: 30px">
+        <div class="inputBox">
+          <input type="email" name="email" required>
+          <label>E-mail</label>
+        </div>
+        <div class="inputBox">
+          <input type="password" name="pass" required>
+          <label>Password</label>
+        </div>
+        <div id="type">
+          <div class="div-lbl-type"><label class="lbl-type"><input class="radio-type" type="radio" name="type" value="etudiant" required>etudiant</label></div>
+          <div class="div-lbl-type"><label class="lbl-type"><input class="radio-type" type="radio" name="type" value="admin" required>admin</label></div>
+        </div>
+        <input type="submit" value="Connectez-vous">
+      </div>
+    </form>
+  <!-- </div> -->
+
+</body>
+
+</html>

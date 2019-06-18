@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title id="title"></title>
+  <style>
+    @font-face {
+      font-family: 'cairo';
+      src: url('fonts/Cairo-SemiBold.ttf')
+    }
+
+    * {
+      font-family: cairo;
+    }
+
+    body {
+      margin: 0;
+      background: url('img/bg.svg');
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    nav {
+      height: 33px;
+      background-color: #50bc30;
+      padding: 5px 10px;
+    }
+
+    nav>a {
+      float: left;
+      border: 1px solid black;
+      height: 30px;
+      padding: 0 20px;
+    }
+
+    nav>a:hover {
+      background-color: #249318;
+    }
+
+    /* section#main {} */
+
+    #page-header {
+      padding: 30px;
+      text-align: center;
+    }
+
+    #basic-infos {
+      padding: 20px calc(50% - 211px);
+    }
+
+    #basic-infos-inner {
+      padding: 20px;
+      background-color: #fff;
+      border: 1px black solid;
+      width: 380px;
+    }
+
+    #etat {
+      padding: 50px calc(50% - 280px);
+    }
+
+    #etat-inner {
+      background-color: #fff;
+      border: 1px black solid;
+      max-width: 520px;
+      min-width: 280px;
+      padding: 60px;
+    }
+
+    #etat-inner>header, #basic-infos-inner>header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .etat {
+      padding: 5px;
+    }
+
+    .etat-img {
+      width: 31px;
+      float: left;
+    }
+
+    .etat-desc {
+      padding-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="./"><img src="img/home.png" alt="home"></a>
+  </nav>
+  <section id="main">
+    <h2 id="page-header">Pane de l'Étudiant</h2>
+    <div id="basic-infos">
+      <div id="basic-infos-inner">
+        <header>Your informations:</header>
+        <div>Nom: $nom</div>
+        <div>Prénom: $prenom</div>
+      </div>
+    </div>
+    <div id="etat">
+      <div id="etat-inner">
+        <header>Votre état actuel:</header>
+        <div class="etat"><img class="etat-img" src="img/fail.png" alt=""><span class="etat-desc">Vous êtes en attente lore</span></div>
+        <div class="etat"><img class="etat-img" src="img/not-yet.png" alt=""><span class="etat-desc">Vous etes pas acceptée</span></div>
+        <div class="etat"><img class="etat-img" src="img/success.png" alt=""><span class="etat-desc">You are welcome</span></div>
+        <div class="etat"><img class="etat-img" src="img/not-yet.png" alt=""><span class="etat-desc">You are welcome</span></div>
+        <div class="etat"><img class="etat-img" src="img/not-yet.png" alt=""><span class="etat-desc">You are welcome</span></div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

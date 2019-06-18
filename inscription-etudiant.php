@@ -18,7 +18,7 @@
       margin: 0;
       background: url('img/bg.svg');
       background-size: cover;
-      background-attachment: fixed;
+      
     }
 
     nav {
@@ -49,6 +49,7 @@
       text-align: center;
       margin: 10px 0 0;
       padding: 20px;
+      color: #3c3c3c;
     }
 
     form {
@@ -64,10 +65,6 @@
       float: left;
     }
 
-    form>div:last-child {
-      width: calc(100% - 20px);
-    }
-
     article {
       padding: 20px 0;
       width: 386px;
@@ -75,7 +72,7 @@
     }
 
     article#note>div {
-      margin-top: 26px;
+      margin-top: 6px;
       border-left: 5px greenyellow solid;
       padding: 20px 10px;
       background-color: #edf7c4;
@@ -96,15 +93,25 @@
 
     [type="submit"] {
       width: 386px;
-      margin: 36px 0 0;
+      margin-top: 15px;
       border-radius: 6px;
       border: 1px solid #0006;
-      background-color: #f6f6f6;
+      background-color: #3aff00c7;
       margin-left: calc(50% - 193px);
     }
 
     [type="submit"]:hover {
-      background-color: #e6e6e6;
+      background-color: #34d123;
+    }
+
+    @media only screen and (max-width: 889px) {
+      form {
+        padding-left: calc(50% - 210px);
+        width: 420px;
+      }
+      form>div:last-child {
+        width: 386px;
+      }
     }
   </style>
 </head>
@@ -120,19 +127,14 @@
     <h2>
       Les informations de l'inscription:
     </h2>
-    <form action="inscription.php" method="post">
+    <form action="inscription.php" method="post" onsubmit="return passwordMatch()">
       <div>
-        <article id="note">
-          <div>
-            <span style="background-color: greenyellow;">&nbsp;Note:&nbsp;</span>&nbsp;(*) est un champ obligatoire.
-          </div>
-        </article>
         <article>
           <label for="nom">Nom:*</label><br>
-          <input type="text" name="nom" id="nom" required maxlength="24" placeholder="Exemple: Zineb"><br>
+          <input type="text" name="nom" id="nom" required maxlength="24" placeholder="Exemple: Boussif"><br>
 
           <label for="prenom">Prénom:*</label><br>
-          <input type="text" name="prenom" id="prenom" required maxlength="24" placeholder="Exemple: Boussif"><br>
+          <input type="text" name="prenom" id="prenom" required maxlength="24" placeholder="Exemple: Zineb"><br>
 
           <label for="daten">Date de Naissance:*</label><br>
           <input type="date" name="daten" id="daten" required><br>
@@ -145,6 +147,9 @@
 
           <label for="pass">Mot de Passe:*</label><br>
           <input type="password" name="pass" id="pass" maxlength="24" minlength="8" required><br>
+
+          <label for="cpass">Confirmer le Mot de Passe:*</label><br>
+          <input type="password" name="cpass" id="cpass" maxlength="24" minlength="8" required><br>
         </article>
       </div>
 
@@ -166,48 +171,64 @@
           <label for="adresse">Adresse:*</label><br>
           <input type="text" name="adresse" id="adresse" maxlength="256"
             placeholder="Exemple: rue bouakel rabah thenia boumerdes" required><br>
+          
+          <label for="theme">Theme de concours:*</label><br>
+          <?php
+
+          require_once 'root.php';
+          if (isset($_GET['theme'])) {
+            $theme = $_GET['theme'];
+            echo <<< _THEME
+            <select id="theme" name="theme" disabled required style="width: 386px;">
+              <option value="$theme" selected>$theme</option>
+            </select>
+_THEME;
+          } else {
+            echo <<< _THEME_BEGIN
+            <select id="theme" name="theme" required style="width: 386px;">
+              <option value="none" selected disabled>-</option>
+_THEME_BEGIN;
+            $result = $connection->query('SELECT conc_id, theme FROM concours');
+            for ($i = 0; $i < $result->num_rows; $i++) {
+              $row = $result->fetch_row();
+              $conc_id = $row[0];
+              $theme = htmlspecialchars_decode($row[1]);
+              echo "
+              <option value=\"$conc_id\">$theme</option>
+              ";
+            }
+            // $theme = htmlentities("Réseau");
+            // $result = $connection->query("insert into concours values(null, '$theme', 54,null, null, null, null, null)");
+            echo <<< _THEME_END
+            </select>
+_THEME_END;
+          }
+          ?>
+          
         </article>
 
-        <article>
-          <label>Langue:*</label>
-          <select name="lang" style="width: 140px;" required>
-            <option value="0" selected disabled>-</option>
-            <option value="English">English</option>
-            <option value="French">Français</option>
-            <option value="Arabic">العربية</option>
-            <!-- temp.html -->
-          </select>
-          <label for="niveau">Niveau:*</label>
-          <select name="niveau" style="width: 114px;" required>
-            <option value="0" selected disabled>-</option>
-            <option value="Bilingue">Bilingue</option>
-            <option value="Lu, écrit, parlé">Lu, écrit, parlé</option>
-            <option value="Courant">Courant</option>
-          </select><br>
+
+        <article id="note">
+          <div>
+            <span style="background-color: greenyellow;">&nbsp;Note:&nbsp;</span>&nbsp;(*) est un champ obligatoire.
+          </div>
         </article>
         <article>
-          <label for="diplome">Diplôme et formations:*</label><br>
-          <input type="text" name="diplome" id="diplome" placeholder="exemple: stage" required style="width: 230px">
-          <input type="date" name="dated" style="width: 140px" required><br>
+          <input type="submit" value="S'inscrire">
         </article>
-        <article>
-            <label for="experience">Expérience:</label><br>
-            <input type="text" name="experience" id="experience" placeholder="exemple: plombie" style="width: 296px">
-            <select name="anneexperience" style="width: 80px;">
-              <option selected disabled>-</option>
-              <option value="0">&lt;1 an</option>
-              <option value="1">1 an</option>
-              <option value="2">2 ans</option>
-              <option value="3">3 ans</option>
-              <option value="4">&gt;3 ans</option>
-            </select>
-        </article>
-      </div>
-      <div>
-        <input type="submit" value="S'inscrire">
+      
       </div>
     </form>
   </section>
+  <script>
+    function passwordMatch() {
+      if (document.getElementById('pass').value ===
+        document.getElementById('cpass').value)
+        return true;
+      alert('La confirmation du mot de passe est incorrect');
+      return false;
+    }
+  </script>
 </body>
 
 </html>

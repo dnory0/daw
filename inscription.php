@@ -67,69 +67,59 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) &&
     isset($_POST['email']) && isset($_POST['pass']) &&
     isset($_POST['tel']) && isset($_POST['nationalite']) &&
     isset($_POST['pays']) && isset($_POST['adresse']) &&
-    isset($_POST['lang']) && isset($_POST['niveau']) &&
-    isset($_POST['diplome']) && isset($_POST['dated'])
-  ) {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $daten = $_POST['daten'];
-    $lieun = $_POST['lieun'];
-    $email = $_POST['email'];
-    $pass = $_POST['pass'];
-    $tel = $_POST['tel'];
-    $nationalite = $_POST['nationalite'];
-    $pays = $_POST['pays'];
-    $adresse = $_POST['adresse'];
-    $lang = $_POST['lang'];
-    $niveau = $_POST['niveau'];
-    $diplome = $_POST['diplome'];
-    $dated = $_POST['dated'];
-    // les champs de experience et anneexperience ne sont pas obliguatoires.
-    if (isset($_POST['experience']) && isset($_POST['anneexperience'])) {
-      // on utilisée plus tard.
-      $experience = $_POST['experience'];
-      $anneexperience = $_POST['anneexperience'];
-    }
-    // check email and phone number if already exist in our database: stop registration, else continue.
-    $result = $connection->query("SELECT mat FROM etudiant WHERE email='$email' OR tel='$tel'");
-    if (!$result->num_rows) {
-      // insert new user.
-      $result = $connection->query("INSERT INTO etudiant VALUES(
-        NULL, '$nom', '$prenom', '$daten', '$lieun', '$email', '$pass', '$tel', '$nationalite',
-        '$pays', '$adresse', '$lang', '$niveau', 'att', 1
-      )");
-      if ($result) {
-        // inserting new user successfully.
-        $success = true;
-        $successmsg = <<< _SUCCESS_MSG
-        <div>Félicitations $nom! Votre compte a été créé.</div>
-        <div id="note">
-          <span style="background-color: #ff5516;">&nbsp;Note:&nbsp;</span>
-          &nbsp;Cet compte va être supprimer automatiquement si vous avez été réfusés
-          ou après la réalisation de concours.
-        </div>
+    isset($_POST['theme'])
+) {
+  $nom = $_POST['nom'];
+  $prenom = $_POST['prenom'];
+  $daten = $_POST['daten'];
+  $lieun = $_POST['lieun'];
+  $email = $_POST['email'];
+  $pass = $_POST['pass'];
+  $tel = $_POST['tel'];
+  $nationalite = $_POST['nationalite'];
+  $pays = $_POST['pays'];
+  $adresse = $_POST['adresse'];
+  $theme = $_POST['theme'];
+  // check email and phone number if already exist in our database: stop registration, else continue.
+  $result = $connection->query("SELECT mat FROM etudiant WHERE email='$email' OR tel='$tel'");
+  if (!$result->num_rows) {
+    // insert new user.
+    $result = $connection->query("INSERT INTO etudiant VALUES(
+      NULL, '$nom', '$prenom', '$daten', '$lieun', '$email', '$pass', '$tel', '$nationalite',
+      '$pays', '$adresse', 'att', null, $theme
+    )");
+    if ($result) {
+      // inserting new user successfully.
+      $success = true;
+      $successmsg = <<< _SUCCESS_MSG
+      <div>Félicitations $nom! Votre compte a été créé.</div>
+      <div id="note">
+        <span style="background-color: #ff5516;">&nbsp;Note:&nbsp;</span>
+        &nbsp;Cet compte va être supprimer automatiquement si vous avez été réfusés
+        ou après la réalisation de concours.
+      </div>
 _SUCCESS_MSG;
-      } else {
-        // inserting new user failed.
-        $success = false;
-        $failmsg = <<< _FAIL_MSG
-          <div>Désolé, on a un problème unconnue pour le moment, reéssayer après un moment.</div>
-_FAIL_MSG;
-      }
     } else {
-      // email/tel already exists on the database.
+      // inserting new user failed.
       $success = false;
       $failmsg = <<< _FAIL_MSG
-        <div>Désolé, cet e-mail ou/et téléphone a déjà utilisé.</div>
+        <div>Désolé, on a un problème unconnue pour le moment, reéssayer après un moment.</div>
 _FAIL_MSG;
     }
   } else {
-    // didn't enter all required informations.
+    // email/tel already exists on the database.
     $success = false;
     $failmsg = <<< _FAIL_MSG
-      <div>Désolé, vous devez remplir tous les informations nécessaire pour l'inscription .</div>
+      <div>Désolé, cet e-mail ou/et téléphone a déjà utilisé.</div>
 _FAIL_MSG;
   }
+} else {
+  // didn't enter all required informations.
+  $success = false;
+  $failmsg = <<< _FAIL_MSG
+    <div>Désolé, vous devez remplir tous les informations nécessaire pour l'inscription .</div>
+_FAIL_MSG;
+}
 
 if ($success) {
   echo <<< _BEGIN
