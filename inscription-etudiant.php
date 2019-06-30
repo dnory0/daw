@@ -133,7 +133,7 @@
           <label for="nom">Nom:*</label><br>
           <input type="text" name="nom" id="nom" required maxlength="24" placeholder="Exemple: Boussif"><br>
 
-          <label for="prenom">Prénom:*</label><br>
+          <label for="prenom">Pr&eacute;nom:*</label><br>
           <input type="text" name="prenom" id="prenom" required maxlength="24" placeholder="Exemple: Zineb"><br>
 
           <label for="daten">Date de Naissance:*</label><br>
@@ -155,10 +155,10 @@
 
       <div>
         <article>
-          <label for="tel">Téléphone:*</label><br>
+          <label for="tel">T&eacute;l&eacute;phone:*</label><br>
           <input type="tel" name="tel" id="tel" placeholder="Exemple: +213558985005" required><br>
 
-          <label for="nationalite">Nationalité:*</label><br>
+          <label for="nationalite">Nationalit&eacute;:*</label><br>
           <input type="text" name="nationalite" id="nationalite" maxlength="64" placeholder="Exemple: Algerien" required><br>
 
           <label for="pays">Pays:*</label><br>

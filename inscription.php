@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vérification</title>
+  <title>V&eacute;rification</title>
   <style>
     @font-face {
       font-family: "cairo";
@@ -41,7 +41,7 @@
       background-color: #edf7c4;
     }
 
-    a {
+    .return>a {
       text-decoration: none;
       color: black;
       padding: 2px 10px;
@@ -51,7 +51,7 @@
       background-color: #f6f6f6;
     }
 
-    a:hover {
+    .return>a:hover {
       background-color: #e6e6e6;
     }
   </style>
@@ -92,32 +92,32 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) &&
       // inserting new user successfully.
       $success = true;
       $successmsg = <<< _SUCCESS_MSG
-      <div>Félicitations $nom! Votre compte a été créé.</div>
+      <div>F&eacute;licitations $nom! Votre compte a &eacute;t&eacute; cr&eacute;e.</div>
       <div id="note">
         <span style="background-color: #ff5516;">&nbsp;Note:&nbsp;</span>
-        &nbsp;Cet compte va être supprimer automatiquement si vous avez été réfusés
-        ou après la réalisation de concours.
+        &nbsp;Cet compte va être supprimer automatiquement si vous avez &eacute;t&eacute; r&eacute;fus&eacute;s
+        ou apr&egrave;s la r&eacute;alisation de concours.
       </div>
 _SUCCESS_MSG;
     } else {
       // inserting new user failed.
       $success = false;
       $failmsg = <<< _FAIL_MSG
-        <div>Désolé, on a un problème unconnue pour le moment, reéssayer après un moment.</div>
+        <div>D&eacute;sol&eacute;, on a un probl&egrave;me unconnue pour le moment, re&eacute;ssayer apr&egrave;s un moment.</div>
 _FAIL_MSG;
     }
   } else {
     // email/tel already exists on the database.
     $success = false;
     $failmsg = <<< _FAIL_MSG
-      <div>Désolé, cet e-mail ou/et téléphone a déjà utilisé.</div>
+      <div>D&eacute;sol&eacute;, cet e-mail ou/et t&eacute;l&eacute;phone a d&eacute;j&agrave; utilis&eacute;.</div>
 _FAIL_MSG;
   }
 } else {
   // didn't enter all required informations.
   $success = false;
   $failmsg = <<< _FAIL_MSG
-    <div>Désolé, vous devez remplir tous les informations nécessaire pour l'inscription .</div>
+    <div>D&eacute;sol&eacute;, vous devez remplir tous les informations n&eacute;cessaires pour l'inscription .</div>
 _FAIL_MSG;
 }
 
@@ -128,7 +128,7 @@ if ($success) {
 _BEGIN;
   echo $successmsg;
   echo <<< _END
-      <div class="return"><a href=".">returnez à la page principale</a></div>
+      <div class="return"><a href=".">returnez &agrave; la page principale</a></div>
     </div>
 _END;
 } else {
@@ -138,7 +138,7 @@ _END;
 _BEGIN;
   echo $failmsg;
   echo <<< _END
-      <div class="return"><a href="inscription-etudiant.html">returnez à la page d'inscription</a></div>
+      <div class="return"><a href="inscription-etudiant.php">returnez &agrave; la page d'inscription</a></div>
     </div>
 _END;
 }

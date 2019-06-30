@@ -1,6 +1,0 @@
-# add error msg box to open when you have error with red fading background. ✔
-# check email is not registered before creating new account. login-signup. ✔
-# add multi-language errormsg ✔
-# add username exists verifications ✔
-# add verifications in javascript ❌
-# add login ability with username ❌

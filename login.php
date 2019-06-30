@@ -112,6 +112,65 @@
     .calender-img {
       float: left;
     }
+
+    /********* wrong email/password **********/
+    body>div#main {
+      text-align: center;
+      height: 100vh;
+      padding: 50px;
+    }
+
+    div.return {
+      margin-top: 50px;
+    }
+
+    .return>a, [type="submit"] {
+      text-decoration: none;
+      color: black;
+      padding: 2px 10px;
+      margin: 36px 0 0;
+      border-radius: 6px;
+      border: 1px solid #0006;
+      background-color: #f6f6f6;
+    }
+
+    .return>a:hover, [type="submit"]:hover {
+      background-color: #e6e6e6;
+    }
+    /*******************************/
+    table {
+      border:  1px solid;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    tr>th:nth-child(even),
+    tr>td:nth-child(even) {
+      background-color: #e9e9e9;
+    }
+
+    tr>th:not(:nth-child(even)),
+    tr>td:not(:nth-child(even)) {
+      background-color: #fff;
+    }
+
+    input:not([type='submit']) {
+      height: 28px;
+      width: 130px;
+      margin: 10px 0;
+    }
+
+    #select-conc {
+      margin-bottom: 30px;
+    }
+
+    select {
+      height: 36px;
+    }
   </style>
 </head>
 <body>
@@ -122,35 +181,34 @@ require_once 'root.php';
 
 // echo isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['type']);
 
-echo <<< _NAV
+if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['type'])) {
+  $email = $_POST['email'];
+  $pass = $_POST['pass'];
+  $type = $_POST['type'];
+  
+  // to set title depending on the type of visitor
+  $title = $type === "etudiant"? "Panneau de l'&eacute;tudiant" : "Panneau de l'administrateur";
+  echo "<script>document.title = \"$title\"</script>";
+  unset($title);
+  
+  
+  // echo "SELECT * FROM $type WHERE email='$email' AND pass='$pass'";
+  if ($type == 'etudiant') {
+  $result = $connection->query("SELECT etudiant.nom, etudiant.prenom, 
+   concours.d_insc_debut, concours.d_insc_fin,concours.d_passe_conc, 
+    concours.d_doc, concours.d_resu_conc, concours.d_fin, concours.theme,
+     etudiant.etat, etudiant.note FROM etudiant INNER JOIN concours WHERE
+      etudiant.conc_id = concours.conc_id AND etudiant.email='$email' AND
+       etudiant.pass='$pass'");
+
+
+    if ($result->num_rows) {
+
+    echo <<< _NAV
 <nav>
   <a href="./"><img src="img/home.png" alt="home"></a>
 </nav>
 _NAV;
-
-
-if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['type'])
-) {
-  $email = $_POST['email'];
-  $pass = $_POST['pass'];
-  $type = $_POST['type'] === 'etudiant'? "etudiant" : "administrateur";
-  
-  // to set title depending on the type of visitor
-  $title = $type === "etudiant"? "Panneau de l'étudiant" : "Panneau de l'administrateur";
-  echo "<script>document.title = \"$title\"</script>";
-  unset($title);
-  
-  $result = $connection->query("SELECT etudiant.nom, etudiant.prenom, 
-  concours.d_insc_debut, concours.d_insc_fin,concours.d_passe_conc, 
-   concours.d_doc, concours.d_resu_conc, concours.d_fin, concours.theme,
-    etudiant.etat, etudiant.note FROM etudiant INNER JOIN concours WHERE
-     etudiant.conc_id = concours.conc_id AND etudiant.email='$email' AND
-      etudiant.pass='$pass'");
-
-  // echo "SELECT * FROM $type WHERE email='$email' AND pass='$pass'";
-  if ($result->num_rows) {
-
-    if ($type == 'etudiant') {
       $row = $result->fetch_array(MYSQLI_ASSOC);
     // needed for 
       $nom = $row['nom'];
@@ -175,23 +233,23 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['type'])
       $d_fin = date('d/m/Y', strtotime($row['d_fin']));
       echo <<< _MAIN_BEGIN
 <section id="main">
-  <h2 id="page-header">Panneau de l'étudiant</h2>
+  <h2 id="page-header">Panneau de l'&eacute;tudiant</h2>
   <div id="basic-infos">
     <div id="basic-infos-inner">
       <header>Vos informations:</header>
       <div>Nom: $nom</div>
-      <div>Prénom(s): $prenom</div>
-      <div>Thème: $theme</div>
+      <div>Pr&eacute;nom(s): $prenom</div>
+      <div>Th&egrave;me: $theme</div>
     </div>
   </div>
   <div id="etat">
     <div id="etat-inner">
-      <header>Votre état actuel:</header>
+      <header>Votre &eacute;tat actuel:</header>
       <div class="etat">
         <img class="etat-img" src="img/success.png" alt="">
         <div class="etat-desc">
-          Votre inscription est réussie.<br>
-          Passer à l'étape suivante.
+          Votre inscription est r&eacute;ussie.<br>
+          Passer &agrave; l'&eacute;tape suivante.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_insc_debut au $d_insc_fin</div>
@@ -205,8 +263,8 @@ _MAIN_BEGIN;
       <div class="etat">
         <img class="etat-img" src="img/success.png" alt="">
         <div class="etat-desc">
-          Prendre vos documents nécessaires.<br>
-          Passer à l'étape suivante.
+          Prendre vos documents n&eacute;cessaires.<br>
+          Passer &agrave; l'&eacute;tape suivante.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_debut_pren_doc au $d_fin_pren_doc</div>
@@ -218,7 +276,7 @@ _DOC;
       <div class="etat">
         <img class="etat-img" src="img/not-yet.png" alt="">
         <div class="etat-desc">
-          Prendre vos documents nécessaires.
+          Prendre vos documents n&eacute;cessaires.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_debut_pren_doc au $d_fin_pren_doc</div>
@@ -233,8 +291,8 @@ _NOT_YET;
       <div class="etat">
         <img class="etat-img" src="img/success.png" alt="">
           <div class="etat-desc">
-          Les documents ont été étudiés et acceptés.<br>
-          Passer à l'étape suivante.
+          Les documents ont &eacute;t&eacute; &eacute;tudi&eacute;s et accept&eacute;s.<br>
+          Passer &agrave; l'&eacute;tape suivante.
         <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_debut_acc_doc au $d_fin_acc_doc</div>
@@ -246,7 +304,7 @@ _CAN;
       <div class="etat">
         <img class="etat-img" src="img/fail.png" alt="">
         <div class="etat-desc">
-          Les documents ont été étudiés mais refusés.
+          Les documents ont &eacute;t&eacute; &eacute;tudi&eacute;s mais refus&eacute;s.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_debut_acc_doc au $d_fin_acc_doc</div>
@@ -258,7 +316,7 @@ _REF;
       <div class="etat">
         <img class="etat-img" src="img/not-yet.png" alt="">
         <div class="etat-desc">
-          Les documents sont en cours d'étude.
+          Les documents sont en cours d'&eacute;tude.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_debut_acc_doc au $d_fin_acc_doc</div>
@@ -273,7 +331,7 @@ _NOT_YET;
         <img class="etat-img" src="img/success.png" alt="">
         <div class="etat-desc">
           Passer l'examen.<br>
-          Passer à l'étape suivante.
+          Passer &agrave; l'&eacute;tape suivante.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_passe_conc</div>
@@ -299,7 +357,7 @@ _NOT_YET;
       <div class="etat">
         <img class="etat-img" src="img/success.png" alt="">
         <div class="etat-desc">
-          L'affichage des résultats.
+          L'affichage des r&eacute;sultats.
           <div>
             Note: $note<br>
           <div>
@@ -314,7 +372,7 @@ _REU;
       <div class="etat">
         <img class="etat-img" src="img/fail.png" alt="">
         <div class="etat-desc">
-          L'affichage des résultats.
+          L'affichage des r&eacute;sultats.
           <div>
             Note: $note<br>
           <div>
@@ -329,7 +387,7 @@ _NRE;
       <div class="etat">
         <img class="etat-img" src="img/not-yet.png" alt="">
         <div class="etat-desc">
-          L'affichage des résultats.
+          L'affichage des r&eacute;sultats.
           <div>
             <img src="img/calendar.png" alt="" class="calender-img">
             <div>$d_resu_conc au $d_fin</div>
@@ -338,15 +396,172 @@ _NRE;
       </div>
 _NOT_YET;
 
-      // echo <<< _MAIN_END
-// </div>
-// _MAIN_END;
-    } elseif ($type == 'administrateur') {
-      echo 'hi';
+echo <<< _MAIN_END
+    </div>
+  </div>
+</section>
+_MAIN_END;
+    } else {
+      $errormsg = "E-mail/Mot de passe incorrect";
+      echo <<< _ECHO
+      <div id="main" style="background-color: #fff5f1;">
+        <div><img src="img/fail.png" alt="Failed" style="width: 180px;"></div>
+        <div>$errormsg</div>
+        <div class="return"><a href="login.html">returnez &agrave; la page de connection</a></div>
+      </div>
+_ECHO;
     }
-  } else {
-    $errormsg = "E-mail/Mot de passe incorrect";
-  } 
+
+  } elseif ($type == 'admin') {
+    $result = $connection->query("SELECT * FROM administrateur WHERE email='$email' AND pass='$pass'");
+    if ($result->num_rows) {
+      $row = $result->fetch_array(MYSQLI_ASSOC);
+      $nom = $row['nom'];
+      $prenom = $row['prenom'];
+    echo <<< _NAV
+<nav>
+  <a href="./"><img src="img/home.png" alt="home"></a>
+</nav>
+_NAV;
+    echo <<< _MAIN_BEGIN
+<section id="main">
+  <h2 id="page-header">Panneau de l'administrateur</h2>
+
+_MAIN_BEGIN;
+      echo <<< _INNER_BEGIN
+  <div style="padding: 20px;">
+    <div>
+      <h3>Ajouter un concours:</h3>
+      <form method="GET" id="add-conc">
+      <table>
+        <tr>
+          <th>Th&egrave;me:</th>
+          <th>Nombre des places:</th>
+          <th>Debut d'inscription:</th>
+          <th>Fin d'inscription:</th>
+          <th>Fin d'acceptation des documents:</th>
+          <th>Date de l'&eacute;xamen:</th>
+          <th>Date de r&eacute;sultat:</th>
+          <th>Derni&egrave;re date d'affichage:</th>
+        </tr>
+        <tr>
+          <td><input id="add-theme" type="text" name="theme" required></td>
+          <td><input id="add-num_pl" type="number" name="num_pl" required></td>
+          <td><input id="add-d_insc_debut" type="date" name="d_insc_debut" required></td>
+          <td><input id="add-d_insc_fin" type="date" name="d_insc_fin" required></td>
+          <td><input id="add-d_doc" type="date" name="d_doc" required></td>
+          <td><input id="add-d_passe_conc" type="date" name="d_passe_conc" required></td>
+          <td><input id="add-d_resu_conc" type="date" name="d_resu_conc" required></td>
+          <td><input id="add-d_fin" type="date" name="d_fin" required></td>
+        </tr>
+      </table>
+    </form>
+    <div id="add-conc-msg"></div>
+    <input type="submit" form="add-conc" value="Ajouter" style="margin-top: 20px; float:right;">
+    <script>
+      document.getElementById('add-conc').onsubmit = (e) => {
+        event.preventDefault();
+        conc_id = document.getElementById('concours-select').value;
+        request = new XMLHttpRequest();
+        theme = document.getElementById('add-theme').value;
+        num_pl = document.getElementById('add-num_pl').value;
+        d_insc_debut = document.getElementById('add-d_insc_debut').value;
+        d_insc_fin = document.getElementById('add-d_insc_fin').value;
+        d_doc = document.getElementById('add-d_doc').value;
+        d_passe_conc = document.getElementById('add-d_passe_conc').value;
+        d_resu_conc = document.getElementById('add-d_resu_conc').value;
+        d_fin = document.getElementById('add-d_fin').value;
+        request.open("GET", `ajouter-concours.php?
+          theme=` + theme + `&
+          num_pl=` + num_pl + `&
+          d_insc_debut=` + d_insc_debut + `&
+          d_insc_fin=` + d_insc_fin + `&
+          d_doc=` + d_doc + `&
+          d_passe_conc=` + d_passe_conc + `&
+          d_resu_conc=` + d_resu_conc + `&
+          d_fin=` + d_fin, true
+        );
+        request.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              if (this.responseText != null) {
+                let concours_space = document.getElementById('add-conc-msg');
+                concours_space.innerHTML = this.responseText;
+              } else alert("Communication error: No data received")
+            } else alert("Communication error: " + this.statusText)
+          }
+        }
+        request.send(null)
+      }
+    </script>
+  </div>
+  <div style="padding: 20px;">
+    <h3>Modifier un concours ou les informations des &eacute;tudiants:</h3>
+    <form id="select-conc">
+      <select name="conc_id" id="concours-select">
+        <option value="0" selected disabled>-</option>
+_INNER_BEGIN;
+
+  $result = $connection->query("SELECT conc_id, theme FROM concours");
+  for ($i = 0; $i < $result->num_rows; ++$i) {
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $conc_id = $row['conc_id'];
+    $theme = $row['theme'];
+    echo "<option value='$conc_id'>$theme</option>";
+  }
+  echo <<< _INNER_END
+        
+      </select>
+      <input type="submit" value="Trouver">
+    </form>
+    <div id="concours-space">
+    </div>
+    <script>
+      form = document.getElementById('select-conc');
+      form.onsubmit = (event) => {
+        event.preventDefault();
+        conc_id = document.getElementById('concours-select').value;
+        request = new XMLHttpRequest();
+        request.open("GET", "gestion-concours.php?conc_id=" + conc_id, true);
+        request.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              if (this.responseText != null) {
+                let concours_space = document.getElementById('concours-space');
+                concours_space.innerHTML = this.responseText;
+                Array.from(concours_space.getElementsByTagName('script')).forEach((script) => {
+                  eval(script.innerHTML);
+                });
+
+              } else alert("Communication error: No data received")
+            } else alert("Communication error: " + this.statusText)
+          }
+        }
+        request.send(null)
+      }
+    </script>
+_INNER_END;
+      for ($i = 0; $i < $result->num_rows; ++$i) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        $theme = $row['theme'];
+        
+      }
+
+      echo <<< _INNER
+    </div>
+  </div>
+_INNER;
+    } else {
+      $errormsg = "E-mail/Mot de passe incorrect";
+      echo <<< _ECHO
+<div id="main" style="background-color: #fff5f1;">
+  <div><img src="img/fail.png" alt="Failed" style="width: 180px;"></div>
+  <div>$errormsg</div>
+  <div class="return"><a href="login.html">returnez &agrave; la page de connection</a></div>
+</div>
+_ECHO;
+    }
+  }
 }
 ?>
 </body>

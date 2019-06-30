@@ -72,8 +72,8 @@ si vous avez des errors, le possible patch que vous changer le 'user' et le 'pas
       3. ref (**ref**usé) (deprecated)
       4. con (accepter, **can**didate dans le concours)
       5. pas l'étudiant **pas**sai l'examen
-      5. nre (**n**on-**ré**ussi)
-      6. reu (**réu**ssi)
+      6. nre (**n**on-**ré**ussi)
+      7. reu (**réu**ssi)
 
 ### Table administrateur:
    - mat: 'matricule'
