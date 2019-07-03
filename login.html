@@ -2,14 +2,12 @@
 
 <head>
   <title>Connectez-vous</title>
-  <link rel="stylesheet" type="text/css" href="style2.css">
 </head>
 <style>
   body {
     margin: 0;
     background: url('img/bg.svg');
-    background-size: cover;  
-    margin: 0;
+    background-size: cover;
     padding: 0;
     font-family: sans-serif;
     background-attachment: fixed;
@@ -98,25 +96,20 @@
   }
 
   .box input[type="submit"] {
-    background: transparent;
     outline: none;
     color: #fff;
     padding: 10px 20px;
     cursor: pointer;
     width: 142px;
-    margin-top: 15px;
     border-radius: 6px;
     border: 1px solid #0006;
     background-color: #3aff00c7;
-    margin-left: 200px;
+    margin: 15px auto 30px 200px;
   }
 </style>
 
 <body>
 
-  <!-- <div class="box"> -->
-    <!-- <input type="radio" name="" id=""> -->
-    
     <form method="POST" action="login.php" class="box">
       <h2>Login</h2>
       <div style="padding: 30px">
@@ -133,9 +126,12 @@
           <div class="div-lbl-type"><label class="lbl-type"><input class="radio-type" type="radio" name="type" value="admin" required>admin</label></div>
         </div>
         <input type="submit" value="Connectez-vous">
+        <div style="text-align: center">
+          <a href="./inscription-etudiant.php" style="margin-top: 200px; margin-left: auto">N'a pas un compte?</a>
+        </div>
       </div>
+
     </form>
-  <!-- </div> -->
 
 </body>
 

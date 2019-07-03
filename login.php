@@ -38,9 +38,7 @@
     nav>a:hover {
       background-color: #249318;
     }
-
-    /* section#main {} */
-
+    
     #page-header {
       padding: 30px;
       text-align: center;
@@ -62,8 +60,6 @@
     }
 
     #etat-inner {
-      /* background-color: #fff; */
-      /* border: 1px black solid; */
       max-width: 520px;
       min-width: 280px;
       padding: 60px;
@@ -99,11 +95,9 @@
 
     .etat-desc {
       background-color: white;
-      padding-left: 10px;
       border: 1px solid #a8a8a8;
       border-radius: 3px;
-      box-shadow: 0px 0px 4px #848484;
-      margin-left: 10px;
+      box-shadow: 0 0 4px #848484;
       padding: 6px;
       width: 360px;
       margin-left: 40px;
@@ -171,10 +165,14 @@
     select {
       height: 36px;
     }
+    
+    #etd-msg {
+        margin: 0 70px;
+    }
   </style>
 </head>
 <body>
-  
+
 <?php
 // session_start();
 require_once 'root.php';
@@ -194,12 +192,12 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['type'])) {
   
   // echo "SELECT * FROM $type WHERE email='$email' AND pass='$pass'";
   if ($type == 'etudiant') {
-  $result = $connection->query("SELECT etudiant.nom, etudiant.prenom, 
-   concours.d_insc_debut, concours.d_insc_fin,concours.d_passe_conc, 
+  $result = $connection->query("SELECT etudiant.nom, etudiant.prenom,
+   concours.d_insc_debut, concours.d_insc_fin,concours.d_passe_conc,
     concours.d_doc, concours.d_resu_conc, concours.d_fin, concours.theme,
      etudiant.etat, etudiant.note FROM etudiant INNER JOIN concours WHERE
-      etudiant.conc_id = concours.conc_id AND etudiant.email='$email' AND
-       etudiant.pass='$pass'");
+      etudiant.conc_id = concours.conc_id AND etudiant.email=\"$email\" AND
+       etudiant.pass=\"$pass\"");
 
 
     if ($result->num_rows) {
@@ -207,10 +205,11 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['type'])) {
     echo <<< _NAV
 <nav>
   <a href="./"><img src="img/home.png" alt="home"></a>
+  <a style="float: right; background-color: white; text-decoration: none" href="login.html">D&eacute;connectez</a>
 </nav>
 _NAV;
       $row = $result->fetch_array(MYSQLI_ASSOC);
-    // needed for 
+    // needed for
       $nom = $row['nom'];
       $prenom = $row['prenom'];
       $theme = $row['theme'];
@@ -218,7 +217,7 @@ _NAV;
       $date_doc = $row['d_doc'];
       $note = $row['note'];
 
-    // to substract the date from concours table in the 'dd/mm/yyyy' format  
+    // to substract the date from concours table in the 'dd/mm/yyyy' format
       $d_insc_debut = date('d/m/Y', strtotime($row['d_insc_debut']));
       $d_insc_fin = date('d/m/Y', strtotime($row['d_insc_fin']));
       // the acception of documents starts after 2 days of inscription end.
@@ -421,6 +420,7 @@ _ECHO;
     echo <<< _NAV
 <nav>
   <a href="./"><img src="img/home.png" alt="home"></a>
+  <a style="float: right; background-color: white; text-decoration: none" href="login.html">D&eacute;connectez</a>
 </nav>
 _NAV;
     echo <<< _MAIN_BEGIN
@@ -510,7 +510,7 @@ _INNER_BEGIN;
     echo "<option value='$conc_id'>$theme</option>";
   }
   echo <<< _INNER_END
-        
+      
       </select>
       <input type="submit" value="Trouver">
     </form>

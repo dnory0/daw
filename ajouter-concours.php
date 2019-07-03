@@ -16,11 +16,12 @@ isset($_GET['d_resu_conc']) && isset($_GET['d_fin'])) {
   $d_fin = $_GET['d_fin'];
   
   
-  $result = $connection->query("SELECT * FROM concours WHERE theme='$theme'");
-  if (!$result->num_rows) {
+  $result = $connection->query("SELECT * FROM concours WHERE theme=\"$theme\"");
+  if (!$result) die("<div style='background-color: red; padding: 20px;'>On a une error d'ajouter ce concours.</div>");
+  elseif (!$result->num_rows) {
     $result = $connection->query("INSERT INTO concours VALUES(
       null,
-      '$theme',
+      \"$theme\",
       '$num_pl',
       '$d_insc_debut',
       '$d_insc_fin',
@@ -29,8 +30,8 @@ isset($_GET['d_resu_conc']) && isset($_GET['d_fin'])) {
       '$d_resu_conc',
       '$d_fin'
     )");
-    if (!$result) die("<div style='background-color: red; padding: 20px;'>On a une error d'ajouter ce concours.</div>");
-    else echo "<div style='background-color: green; padding: 20px;'>Ce theme a &eacute;t&eacute; ajout&eacute;.</div>";
+
+    echo "<div style='background-color: green; padding: 20px;'>Ce theme a &eacute;t&eacute; ajout&eacute;.</div>";
   } else echo "<div style='background-color: orangered; padding: 20px;'>Ce theme d&eacute;j&agrave; existe.</div>";
 
 }

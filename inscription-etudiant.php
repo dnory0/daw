@@ -119,15 +119,14 @@
 <body>
   <nav>
     <a href="./"><img src="img/home.png" alt="home"></a>
-    <!-- <a href="inscription.html">S'inscrire comme un administrateur</a>
-    <a href=""></a> -->
+    <a style="float: right; background-color: white; text-decoration: none" href="login.html">Connectez-vous</a>
   </nav>
   <section>
 
     <h2>
       Les informations de l'inscription:
     </h2>
-    <form action="inscription.php" method="post" onsubmit="return passwordMatch()">
+    <form action="inscription.php" method="post" onsubmit="document.getElementById('theme').disabled = false; return passwordMatch()">
       <div>
         <article>
           <label for="nom">Nom:*</label><br>
@@ -176,12 +175,14 @@
           <?php
 
           require_once 'root.php';
-          if (isset($_GET['theme'])) {
-            $theme = $_GET['theme'];
+          if (isset($_GET['conc_id'])) {
+            $conc_id = $_GET['conc_id'];
+            $result = $connection->query("SELECT theme FROM concours WHERE conc_id=$conc_id");
+            $theme = $result->fetch_array(MYSQLI_ASSOC)['theme']. "(Selected)";
             echo <<< _THEME
-            <select id="theme" name="theme" disabled required style="width: 386px;">
-              <option value="$theme" selected>$theme</option>
-            </select>
+              <select id="theme" name="theme" disabled required style="width: 386px;">
+                <option value="$conc_id" selected>$theme</option>
+              </select>
 _THEME;
           } else {
             echo <<< _THEME_BEGIN
@@ -197,8 +198,6 @@ _THEME_BEGIN;
               <option value=\"$conc_id\">$theme</option>
               ";
             }
-            // $theme = htmlentities("Réseau");
-            // $result = $connection->query("insert into concours values(null, '$theme', 54,null, null, null, null, null)");
             echo <<< _THEME_END
             </select>
 _THEME_END;

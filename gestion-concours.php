@@ -98,8 +98,8 @@ _RESPONSE;
   
   echo <<< _STUDENT_BEGIN
 
-    <div style="padding: 20px;">
-      <form method="GET" id="etd" style="padding: 50px;">
+    <div style="padding: 20px 20px 0;">
+      <form method="GET" id="etd" style="padding: 50px 50px 0;">
         <table id="etat-etd" style="border: 1px black solid">
           <tr>
             <th>Nom:</th>
@@ -173,14 +173,12 @@ _TD;
         for (i = 0; i < mat.length; i++) {
           varsString += 'mat[]=' + mat[i].value +'&';
         }
-        console.log('update-etudiants.php?' + varsString.substring(0, varsString.length-1));
         request = new XMLHttpRequest();
         request.open('GET', 'update-etudiants.php?' + varsString.substring(0, varsString.length-1), true);
         request.onreadystatechange = function() {
           if (this.readyState == 4) {
             if (this.status == 200) {
               if (this.responseText != null) {
-                // console.log(this.responseText)
                 document.getElementById('etd-msg').innerHTML = this.responseText;
               } else alert("Communication error: No data received")
             } else alert("Communication error: " + this.statusText)
@@ -189,40 +187,33 @@ _TD;
         request.send(null);
       }
     </script>
-_STUDENT_END;
-
-        // for ($i = 0; $i=)
-//         echo <<< _STUDENT_END
-//       request = new XMLHttpRequest();
-//       request.open("GET", `update-etudiants.php?
-//         conc_id=` + $conc_id + `&
-//         theme=` + theme + `&
-//         num_pl=` + num_pl + `&
-//         d_insc_debut=` + d_insc_debut + `&
-//         d_insc_fin=` + d_insc_fin + `&
-//         d_doc=` + d_doc + `&
-//         d_passe_conc=` + d_passe_conc + `&
-//         d_resu_conc=` + d_resu_conc + `&
-//         d_fin=` + d_fin, true
-//       );
-//       request.onreadystatechange = function () {
-//         if (this.readyState == 4) {
-//           if (this.status == 200) {
-//             if (this.responseText != null) {
-//               let modify_conc_msg = document.getElementById('modify-conc-msg');
-//               modify_conc_msg.innerHTML = this.responseText
-//             } else alert("Communication error: No data received")
-//           } else alert("Communication error: " + this.statusText)
-//         }
-//       }
-//       request.send(null)
-//       }
-//     </script>
-// _STUDENT_END;
-
-echo <<< _END
-
   </div>
-_END;
+	<div style="text-align: center; height: 50px; width: 100%; margin-top: 150px;">
+		<form id="rm-conc" action="delete-concours.php" method="get">
+			<input type="submit" value="Supprimer Le Concours" style="background-color: red; color: white;">
+		</form>
+		<script>
+			document.getElementById('rm-conc').onsubmit = (e) => {
+			  e.preventDefault();
+			  if (confirm("Est-ce que vous êtes sure de supprimer ce thème?")) {
+			      console.log('hi')
+				  conc_id = document.getElementsByName('conc_id')[0].value;
+			    request = new XMLHttpRequest();
+	        request.open('GET', 'delete-concours.php?' + `conc_id=${conc_id}`, true);
+	        request.onreadystatechange = function() {
+	          if (this.readyState == 4) {
+	            if (this.status == 200) {
+	              if (this.responseText != null) {
+	                document.getElementById('concours-space').innerHTML = this.responseText;
+	              } else alert("Communication error: No data received")
+	            } else alert("Communication error: " + this.statusText)
+	          }
+	        }
+	        request.send(null);
+        }
+			}
+		</script>
+	</div>
+_STUDENT_END;
 }
 ?>

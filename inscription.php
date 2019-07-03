@@ -61,7 +61,6 @@
 <?php
 require_once 'root.php';
 $success = false;
-
 if (isset($_POST['nom']) && isset($_POST['prenom']) &&
     isset($_POST['daten']) && isset($_POST['lieun']) &&
     isset($_POST['email']) && isset($_POST['pass']) &&
@@ -95,7 +94,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) &&
       <div>F&eacute;licitations $nom! Votre compte a &eacute;t&eacute; cr&eacute;e.</div>
       <div id="note">
         <span style="background-color: #ff5516;">&nbsp;Note:&nbsp;</span>
-        &nbsp;Cet compte va être supprimer automatiquement si vous avez &eacute;t&eacute; r&eacute;fus&eacute;s
+        &nbsp;Cet compte va &ecirc;tre supprimer automatiquement si vous avez &eacute;t&eacute; r&eacute;fus&eacute;s
         ou apr&egrave;s la r&eacute;alisation de concours.
       </div>
 _SUCCESS_MSG;
